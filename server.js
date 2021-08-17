@@ -13,38 +13,32 @@ server.listen(PORT, () => {
 
 })
 
+
+class Forecast{
+    constructor(item){
+        this.date=item.valid_date;
+        this.description = item.weather.description;
+    }
+}
+
+//http://localhost:3001/weather?lat=aaaa&lon=aaaa&searchQuery=Amman
 server.get('/weather', (req, res) => {
     let searchQuery = req.query.searchQuery;
+    console.log(searchQuery)
 
-    // weatherData.forEach((item,ind)=>{
-    //     res.send(item[2].city_name)
-       
-    // let description = weatherData.find(city => {
-    //         if (city[2].city_name === searchQuery) {
-    //             res.send(city[3].city_name)
-    //             return true;
-    //         }
-    //         return weatherData;
-    //     })
-    // // })
+let selectCityInf=weatherData.find((item)=>{
+    if(item.city_name===searchQuery){
+        console.log('exsist')
+        console.log(item)
 
-
-    if(searchQuery.toLowerCase()==='amman'||searchQuery.toLowerCase()==='seattle'||searchQuery.toLowerCase()==='paris'){
-        let arr=[ {
-            "description": "Low of 17.1, high of 23.6 with broken clouds",
-            "date": "2021-03-31"
-          },
-          {
-            "description": "Low of 17.5, high of 29.9 with few clouds",
-            "date": "2021-04-01"
-          }]
-        res.send(arr)
-      
+        return item;
     }
-    else{
-        res.send('error')
-    }
+})
 
+let ForecastArr=selectCityInf.data.map((item)=>{
+    console.log(item)
 
-
-    })
+    return new Forecast(item);
+})
+res.send(ForecastArr)
+})
