@@ -13,6 +13,8 @@ server.listen(PORT, () => {
 
 })
 
+server.use(cors());
+
 
 class Forecast{
     constructor(item){
