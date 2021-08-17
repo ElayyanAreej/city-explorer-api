@@ -7,7 +7,7 @@ const weatherData = require('./data/weather.json')
 
 
 const server = express();
-const PORT = process.env.REACT_APP_PORT;
+const PORT = process.env.PORT;
 server.listen(PORT, () => {
     console.log(`listining ${PORT}`)
 
