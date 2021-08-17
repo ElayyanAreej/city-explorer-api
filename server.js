@@ -24,13 +24,13 @@ class Forecast{
     }
 }
 
-//http://localhost:3001/weather?searchQuery=Amman
+//http://localhost:3001/weather?lat=aaaa&lon=aaaa&searchQuery=Amman
 server.get('/weather', (req, res) => {
     let searchQuery = req.query.searchQuery;
     console.log(searchQuery)
 
 let selectCityInf=weatherData.find((item)=>{
-    if(item.city_name.toLocaleLowerCase()===searchQuery.toLocaleLowerCase){
+    if(item.city_name===searchQuery){
         console.log('exsist')
         console.log(item)
 
