@@ -31,13 +31,13 @@ class Dailyweather{
     }
 }
 
-http://localhost:3001/weather?lat=aaaa&lon=aaaa&searchQuery=Amman
+//http://localhost:3001/weather?lat=aaaa&lon=aaaa&searchQuery=Amman
 server.get('/weather', (req, res) => {
     let searchQuery = req.query.searchQuery;
     console.log(searchQuery)
 
 let selectCityInf=weatherData.find((item)=>{
-    if(item.city_name===searchQuery){
+    if(item.city_name.toLowerCase()===searchQuery.toLowerCase()){
         return item;
     }
 })
