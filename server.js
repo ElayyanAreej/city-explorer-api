@@ -30,7 +30,7 @@ server.get('/weather', (req, res) => {
     console.log(searchQuery)
 
 let selectCityInf=weatherData.find((item)=>{
-    if(item.city_name===searchQuery){
+    if(item.city_name.toLowerCase()===searchQuery.toLowerCase()){
         console.log('exsist')
         console.log(item)
 
@@ -45,3 +45,10 @@ let ForecastArr=selectCityInf.data.map((item)=>{
 })
 res.send(ForecastArr)
 })
+
+server.get('*',notFoundHandler)
+function notFoundHandler(req, res) {
+    res.status(404,404,500).send({
+        "error": "Unable to get the route"
+    })
+}
